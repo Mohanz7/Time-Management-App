@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--命名空间：找到所在的XxxListMapper接口的位置-->
+<mapper namespace="com.example.managing.mapper.TaskFormMapper">
+<!--    <insert id="addingNewTaskList" keyProperty="id" useGeneratedKeys="true">-->
+<!--        <selectKey keyProperty="id" resultType="com.example.managing.entity.TaskFormEntity" order="AFTER">-->
+<!--            SELECT LAST_INSERT_ID() AS id-->
+<!--        </selectKey>-->
+<!--        INSERT INTO taskForm (taskName, taskDescription, taskDate, taskPriority, taskStatus)-->
+<!--        VALUES-->
+<!--        (#{taskName}, #{taskDescription}, #{taskDate}, #{taskPriority}, #{taskStatus});-->
+<!--    </insert>-->
+    <insert id="addingNewTaskList" parameterType="com.example.managing.entity.TaskFormEntity" keyProperty="id" useGeneratedKeys="true" >
+        INSERT INTO taskForm (taskName, taskDescription, taskDate, taskPriority, taskStatus)
+        VALUES
+            (#{taskName}, #{taskDescription},#{taskDate},#{taskPriority},#{taskStatus});
+    </insert>
+
+    <select id="searchingNewTask" resultType="com.example.managing.entity.TaskFormEntity">
+
+        SELECT taskForm.*
+        FROM user
+        JOIN usertasks ON user.id = usertasks.user_id
+        JOIN taskForm ON usertasks.taskForm_id = taskForm.id
+        WHERE user.id = #{user_id};
+<!--        <where>-->
+<!--            <if test="taskName!=null">-->
+<!--                taskName LIKE "%"+#{taskName}+"%";-->
+<!--            </if>-->
+<!--        </where>-->
+    </select>
+
+    <select id="searchingOnlyTodayTask" resultType="com.example.managing.entity.TaskFormEntity">
+        SELECT taskForm.*
+        FROM user
+                 JOIN usertasks ON user.id = usertasks.user_id
+                 JOIN taskForm ON usertasks.taskForm_id = taskForm.id
+        WHERE user.id = #{user_id} and taskForm.taskDate = CURDATE();
+
+    </select>
+
+    <update id="changeNewTaskList" >
+        UPDATE taskForm
+        SET
+            taskName = #{taskName},
+            taskDescription = #{taskDescription},
+            taskDate = #{taskDate},
+            taskPriority = #{taskPriority},
+            taskStatus = #{taskStatus}
+        WHERE id = #{id};
+
+    </update>
+
+    <select id="blurSearch" resultType="com.example.managing.entity.TaskFormEntity">
+
+        SELECT taskForm.*
+        FROM user
+        JOIN usertasks ON user.id = usertasks.user_id
+        JOIN taskForm ON usertasks.taskForm_id = taskForm.id
+        WHERE user.id = #{user_id} and  taskName LIKE CONCAT("%",#{taskName},"%");
+
+
+
+
+        --         select * from  taskForm
+<!--        <where>-->
+<!--                            <if test="taskName!=null">-->
+--                                where taskName LIKE '%吃%';
+<!--                            </if>-->
+<!--                        </where>-->
+
+
+    </select>
+<!--    SELECT *-->
+<!--    FROM taskForm-->
+<!--    JOIN usertasks ON user.id = usertasks.user_id-->
+<!--    JOIN taskForm ON usertasks.taskForm_id = taskForm.id-->
+<!--    <where>-->
+<!--        <if test="taskName!=null">-->
+<!--            taskName LIKE CONCAT("%",#{taskName},"%")-->
+<!--        </if>-->
+<!--        AND-->
+<!--        user.id = #{user_id}-->
+<!--    </where>-->
+
+<!--        select * from  taskForm-->
+<!--                <where>-->
+<!--                    <if test="taskName!=null">-->
+<!--                        taskName LIKE "%"+#{taskName}+"%";-->
+<!--                    </if>-->
+<!--                </where>-->
+<!--    </select>-->
+<!--    <select id="blurSearch" resultType="com.example.managing.entity.TaskFormEntity">-->
+<!--        SELECT * FROM taskForm-->
+<!--        <where>-->
+<!--            <if test="taskName != null">-->
+<!--               taskName LIKE '%' || #{taskName} || '%'-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+
+<!--        SELECT * FROM taskForm-->
+<!--                <where>-->
+<!--                    <if test="taskName != null">-->
+<!--                       taskName LIKE '%' || #{taskName} || '%'-->
+<!--                    </if>-->
+<!--                </where>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

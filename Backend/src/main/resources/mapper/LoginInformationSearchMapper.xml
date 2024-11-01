@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--命名空间：找到所在的XxxListMapper接口的位置-->
+<mapper namespace="com.example.managing.mapper.LoginInformationSearchMapper">
+    <select id="selectLoginInformationSearchListRegAll" resultType="com.example.managing.entity.LoginInformationSearchEntity">
+        select *
+        from user
+        WHERE phone =#{phone};
+
+--         select *
+--         from user
+--         WHERE phone ="13585888517" and password="1234LalalalHahah!";
+    </select>
+
+    <select id="addingNewUserList" resultType="com.example.managing.entity.LoginInformationSearchEntity">
+
+        INSERT INTO user (phone, password)
+        VALUES
+            (#{phone}, #{password});
+
+    </select>
+
+    <select id="alreadyHavePhone" resultType="com.example.managing.entity.LoginInformationSearchEntity">
+        select *
+        from user
+        WHERE phone =#{phone};
+
+        --         select *
+--         from user
+--         WHERE phone ="13585888517" and password="1234LalalalHahah!";
+    </select>
+
+    <select id="insertCode" resultType="com.example.managing.entity.LoginInformationSearchEntity">
+        Update user Set code=#{code}
+        Where phone=#{phone};
+
+        --         select *
+--         from user
+--         WHERE phone ="13585888517" and password="1234LalalalHahah!";
+    </select>
+
+    <select id="whetherTheCodeFit" resultType="com.example.managing.entity.LoginInformationSearchEntity">
+        select *
+        from user
+        WHERE phone =#{phone};
+        --         select *
+--         from user
+--         WHERE phone ="13585888517" and password="1234LalalalHahah!";
+    </select>
+
+
+
+
+</mapper>

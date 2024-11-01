@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--命名空间：找到所在的XxxListMapper接口的位置-->
+<mapper namespace="com.example.managing.mapper.UserTasksMapper">
+
+
+
+
+    <insert id="addingUserIDAndTaskID" >
+
+        INSERT INTO usertasks (user_id,taskForm_id)
+        VALUES
+        (#{user_id}, #{taskForm_id});
+        <!--        <where>-->
+        <!--            <if test="taskName!=null">-->
+        <!--                taskName LIKE "%"+#{taskName}+"%";-->
+        <!--            </if>-->
+        <!--        </where>-->
+    </insert>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>
